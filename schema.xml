@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="access" idMethod="native" phpName="Access">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="key" phpName="Key" type="VARCHAR" size="40" required="true" defaultValue=""/>
+    <column name="controller" phpName="Controller" type="VARCHAR" size="50" required="true" defaultValue=""/>
+    <column name="date_created" phpName="DateCreated" type="TIMESTAMP"/>
+    <column name="date_modified" phpName="DateModified" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="accountbalance" idMethod="native" phpName="Accountbalance">
+    <column name="Account_id" phpName="AccountId" type="VARCHAR" size="225" primaryKey="true" required="true"/>
+    <column name="Starting_balance" phpName="StartingBalance" type="DECIMAL" size="15" scale="2" required="true"/>
+    <column name="Starting_date" phpName="StartingDate" type="DATE" required="true"/>
+    <column name="Lastaccount_balance" phpName="LastaccountBalance" type="DECIMAL" size="15" scale="2" required="true"/>
+    <column name="paymenttransaction_id" phpName="PaymenttransactionId" type="VARCHAR" size="255" required="true"/>
+    <column name="payment_amount" phpName="PaymentAmount" type="INTEGER" size="15" required="true"/>
+    <column name="payment_date" phpName="PaymentDate" type="DATE" required="true"/>
+    <column name="Current_balance" phpName="CurrentBalance" type="DECIMAL" size="15" scale="0" required="true"/>
+    <unique name="Account_id">
+      <unique-column name="Account_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="admin_otp_token" idMethod="native" phpName="AdminOtpToken">
+    <column name="id" phpName="Id" type="INTEGER" sqlType="int(11) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="token_code" phpName="TokenCode" type="VARCHAR" size="200" defaultValue=""/>
+    <column name="user_id" phpName="UserId" type="INTEGER"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" defaultValue="0000-00-00 00:00:00"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" defaultValue="0000-00-00 00:00:00"/>
+    <column name="deleted_at" phpName="DeletedAt" type="DATE"/>
+    <column name="status" phpName="Status" type="CHAR" sqlType="enum('USED','UNUSED')" defaultValue="USED"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="banks" idMethod="native" phpName="Banks">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="code" phpName="Code" type="VARCHAR" size="255" required="true"/>
+    <column name="status" phpName="Status" type="CHAR" sqlType="enum('active','inactive')" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true" defaultValue="0000-00-00 00:00:00"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP" required="true" defaultValue="0000-00-00 00:00:00"/>
+    <column name="deleted_at" phpName="DeletedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="collector" idMethod="native" phpName="Collector">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="collector_name" phpName="CollectorName" type="VARCHAR" size="255" required="true"/>
+    <column name="collector_id" phpName="CollectorId" type="VARCHAR" size="255" required="true"/>
+    <column name="username" phpName="Username" type="VARCHAR" size="255" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="255" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+    <table name="collector_payment" idMethod="native" phpName="CollectorPayment">
+    <column name="id" phpName="Id" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="collector_id" phpName="CollectorId" type="VARCHAR" size="50" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="BillReferenceNumber" phpName="Billreferencenumber" type="VARCHAR" size="50" required="true"/>
+    <column name="TransactionID" phpName="Transactionid" type="VARCHAR" size="255" required="true"/>
+    <column name="SourceBank" phpName="Sourcebank" type="VARCHAR" size="255" required="true"/>
+    <column name="DestinationBank" phpName="Destinationbank" type="VARCHAR" size="255"/>
+    <column name="BuildingType" phpName="Buildingtype" type="VARCHAR" size="100" required="true"/>
+    <column name="CustomerName" phpName="Customername" type="VARCHAR" size="200" required="true"/>
+    <column name="District" phpName="District" type="VARCHAR" size="100" required="true"/>
+    <column name="Email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="Phone" phpName="Phone" type="VARCHAR" size="15" required="true"/>
+    <column name="OutstandingBalance" phpName="Outstandingbalance" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="TransactionDate" phpName="Transactiondate" type="TIMESTAMP" required="true"/>
+    <column name="date_initiated" phpName="DateInitiated" type="VARCHAR" size="50" required="true"/>
+    <column name="date_completed" phpName="DateCompleted" type="VARCHAR" size="50" required="true"/>
+    <column name="amount_paid" phpName="AmountPaid" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="AmountDue" phpName="Amountdue" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="platform" phpName="Platform" type="VARCHAR" size="50" required="true"/>
+    <column name="receipt_no" phpName="ReceiptNo" type="VARCHAR" size="50" required="true"/>
+    <column name="ServiceAddress" phpName="Serviceaddress" type="VARCHAR" size="255" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="payment_status" phpName="PaymentStatus" type="CHAR" sqlType="enum('P','U')" required="true" defaultValue="P"/>
+    <column name="reconcile_status" phpName="ReconcileStatus" type="BOOLEAN" size="1" required="true"/>
+    <column name="created_date" phpName="CreatedDate" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="uploadstatus" phpName="Uploadstatus" type="INTEGER" required="true" defaultValue="0"/>
+    <unique name="key2">
+      <unique-column name="BillReferenceNumber"/>
+      <unique-column name="TransactionID"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="groups" idMethod="native" phpName="Groups">
+    <column name="id" phpName="Id" type="SMALLINT" size="8" sqlType="mediumint(8) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="20" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="100" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="klu_admin" idMethod="native" phpName="KluAdmin">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="50" required="true"/>
+    <column name="username" phpName="Username" type="VARCHAR" size="25" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="100" required="true"/>
+    <column name="usertype" phpName="Usertype" type="VARCHAR" size="25" required="true"/>
+    <column name="registerDate" phpName="Registerdate" type="TIMESTAMP" required="true"/>
+    <column name="lastvisitDate" phpName="Lastvisitdate" type="TIMESTAMP" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="klu_admitype" idMethod="native" phpName="KluAdmitype">
+    <column name="id" phpName="Id" type="TINYINT" size="3" sqlType="tinyint(3) unsigned" primaryKey="true" required="true" defaultValue="0"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="50" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="klu_alerttbl" idMethod="native" phpName="KluAlerttbl">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="pk" phpName="Pk" type="INTEGER" required="true"/>
+    <column name="tbl" phpName="Tbl" type="VARCHAR" size="255" required="true"/>
+    <column name="update_time" phpName="UpdateTime" type="TIMESTAMP" required="true"/>
+    <column name="notificationmgs" phpName="Notificationmgs" type="LONGVARCHAR" required="true"/>
+    <column name="status" phpName="Status" type="CHAR" sqlType="enum('R','P')" required="true" defaultValue="P"/>
+    <unique name="key2">
+      <unique-column name="pk"/>
+      <unique-column name="tbl"/>
+      <unique-column name="update_time"/>
+      <unique-column name="status"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="klu_bill" idMethod="native" phpName="KluBill">
+    <column name="id" phpName="Id" type="INTEGER" size="20" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="ref_no" phpName="RefNo" type="VARCHAR" size="50" required="true"/>
+    <column name="UniqueKeyID" phpName="Uniquekeyid" type="INTEGER" size="50" required="true"/>
+    <column name="customer_id" phpName="CustomerId" type="INTEGER" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="service_type" phpName="ServiceType" type="VARCHAR" size="50" required="true"/>
+    <column name="service_district_id" phpName="ServiceDistrictId" type="VARCHAR" size="20" required="true"/>
+    <column name="billing_cycle" phpName="BillingCycle" type="VARCHAR" size="50" required="true"/>
+    <column name="due_date" phpName="DueDate" type="VARCHAR" size="50" required="true"/>
+    <column name="billing_from" phpName="BillingFrom" type="VARCHAR" size="50" required="true"/>
+    <column name="billing_to" phpName="BillingTo" type="VARCHAR" size="50" required="true"/>
+    <column name="bill_date" phpName="BillDate" type="DATE" required="true"/>
+    <column name="Rate" phpName="Rate" type="VARCHAR" size="100" required="true"/>
+    <column name="MeterNumber" phpName="Meternumber" type="VARCHAR" size="20" required="true"/>
+    <column name="BillingMethod" phpName="Billingmethod" type="VARCHAR" size="100" required="true"/>
+    <column name="DateOfLastReading" phpName="Dateoflastreading" type="DATE" required="true"/>
+    <column name="DateOfCurrentReading" phpName="Dateofcurrentreading" type="DATE" required="true"/>
+    <column name="DaysUsage" phpName="Daysusage" type="INTEGER" required="true"/>
+    <column name="LastMeterReading" phpName="Lastmeterreading" type="INTEGER" required="true"/>
+    <column name="CurrentMeterReading" phpName="Currentmeterreading" type="INTEGER" required="true"/>
+    <column name="UnitsConsumed" phpName="Unitsconsumed" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="LastPaymentAmount" phpName="Lastpaymentamount" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="LastPaymentDate" phpName="Lastpaymentdate" type="VARCHAR" size="50" required="true"/>
+    <column name="MeterMaintenanceCharge" phpName="Metermaintenancecharge" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="Discounts" phpName="Discounts" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="OtherCharges" phpName="Othercharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="PenaltyCharges" phpName="Penaltycharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="TaxCharges" phpName="Taxcharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="Charges" phpName="Charges" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="RoutineCharges" phpName="Routinecharges" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="BillServiceRate" phpName="Billservicerate" type="INTEGER" size="10" required="true"/>
+    <column name="BuildingType" phpName="Buildingtype" type="VARCHAR" size="100" required="true"/>
+    <column name="Route" phpName="Route" type="VARCHAR" size="10" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="service_charge" phpName="ServiceCharge" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="previous_balance" phpName="PreviousBalance" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="payment_received" phpName="PaymentReceived" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="last_payment_received_date" phpName="LastPaymentReceivedDate" type="TIMESTAMP" required="true"/>
+    <column name="current_charge" phpName="CurrentCharge" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="total_due" phpName="TotalDue" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="invoice_no" phpName="InvoiceNo" type="VARCHAR" size="50" required="true"/>
+    <column name="receipt_no" phpName="ReceiptNo" type="VARCHAR" size="50" required="true"/>
+    <column name="date_created" phpName="DateCreated" type="TIMESTAMP" required="true"/>
+    <column name="creator" phpName="Creator" type="VARCHAR" size="50" required="true"/>
+    <column name="status" phpName="Status" type="BOOLEAN" size="1" required="true"/>
+    <index name="key2">
+      <index-column name="status"/>
+      <index-column name="bill_date"/>
+      <index-column name="total_due"/>
+    </index>
+    <unique name="key1">
+      <unique-column name="ref_no"/>
+      <unique-column name="customer_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="klu_bill_migration" idMethod="native" phpName="KluBillMigration">
+    <column name="ID" phpName="Id" type="INTEGER" size="50" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="last_migrated_record" phpName="LastMigratedRecord" type="INTEGER" size="50" required="true"/>
+    <column name="last_migration_datetime" phpName="LastMigrationDatetime" type="TIMESTAMP" required="true"/>
+    <column name="migration_count" phpName="MigrationCount" type="INTEGER" size="10" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="klu_bill_new" idMethod="native" phpName="KluBillNew">
+    <column name="UniqueKeyID" phpName="Uniquekeyid" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="AccountNo" phpName="Accountno" type="VARCHAR" size="20" required="true"/>
+    <column name="ServiceDistrict" phpName="Servicedistrict" type="VARCHAR" size="50" required="true"/>
+    <column name="LastMeterReading" phpName="Lastmeterreading" type="FLOAT" required="true"/>
+    <column name="CurrentMeterReading" phpName="Currentmeterreading" type="FLOAT" required="true"/>
+    <column name="UnitsConsumed" phpName="Unitsconsumed" type="FLOAT" required="true"/>
+    <column name="LastPayDate" phpName="Lastpaydate" type="VARCHAR" size="20" required="true"/>
+    <column name="LastPayAmt" phpName="Lastpayamt" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="PriorBalance" phpName="Priorbalance" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="OutstandingBalance" phpName="Outstandingbalance" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="AmountDue" phpName="Amountdue" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="MeterMaintenanceCharge" phpName="Metermaintenancecharge" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="Discounts" phpName="Discounts" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="OtherCharges" phpName="Othercharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="PenaltyCharges" phpName="Penaltycharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="StampDutyCharges" phpName="Stampdutycharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="ServiceCharges" phpName="Servicecharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="RoutineCharges" phpName="Routinecharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="BillServiceRate" phpName="Billservicerate" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="ServiceTypeDesc" phpName="Servicetypedesc" type="VARCHAR" size="150" required="true"/>
+    <column name="BillPeriod" phpName="Billperiod" type="VARCHAR" size="79" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="MeterNumber" phpName="Meternumber" type="VARCHAR" size="20" required="true"/>
+    <column name="MeterType" phpName="Metertype" type="VARCHAR" size="30" required="true"/>
+    <column name="MeterCondition" phpName="Metercondition" type="VARCHAR" size="50" required="true"/>
+    <column name="LeakageStatus" phpName="Leakagestatus" type="VARCHAR" size="50" required="true"/>
+    <column name="PropertyType" phpName="Propertytype" type="VARCHAR" size="255" required="true"/>
+    <column name="MeterReadDevice" phpName="Meterreaddevice" type="VARCHAR" size="30" required="true"/>
+    <column name="Billmethod" phpName="Billmethod" type="VARCHAR" size="50" required="true"/>
+    <column name="DateCreated" phpName="Datecreated" type="TIMESTAMP" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="klu_bill_ol" idMethod="native" phpName="KluBillOl">
+    <column name="id" phpName="Id" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="ref_no" phpName="RefNo" type="VARCHAR" size="50" required="true"/>
+    <column name="customer_id" phpName="CustomerId" type="VARCHAR" size="100" required="true"/>
+    <column name="service_type" phpName="ServiceType" type="VARCHAR" size="50" required="true"/>
+    <column name="service_district_id" phpName="ServiceDistrictId" type="VARCHAR" size="20" required="true"/>
+    <column name="billing_cycle" phpName="BillingCycle" type="VARCHAR" size="50" required="true"/>
+    <column name="due_date" phpName="DueDate" type="VARCHAR" size="50" required="true"/>
+    <column name="billing_from" phpName="BillingFrom" type="VARCHAR" size="50" required="true"/>
+    <column name="billing_to" phpName="BillingTo" type="VARCHAR" size="50" required="true"/>
+    <column name="bill_date" phpName="BillDate" type="VARCHAR" size="50" required="true"/>
+    <column name="Rate" phpName="Rate" type="VARCHAR" size="100" required="true"/>
+    <column name="MeterNumber" phpName="Meternumber" type="VARCHAR" size="20" required="true"/>
+    <column name="BillingMethod" phpName="Billingmethod" type="VARCHAR" size="100" required="true"/>
+    <column name="DateOfLastReading" phpName="Dateoflastreading" type="VARCHAR" size="50" required="true"/>
+    <column name="DateOfCurrentReading" phpName="Dateofcurrentreading" type="VARCHAR" size="50" required="true"/>
+    <column name="DaysUsage" phpName="Daysusage" type="INTEGER" required="true"/>
+    <column name="LastMeterReading" phpName="Lastmeterreading" type="INTEGER" required="true"/>
+    <column name="CurrentMeterReading" phpName="Currentmeterreading" type="INTEGER" required="true"/>
+    <column name="UnitsConsumed" phpName="Unitsconsumed" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="LastPaymentAmount" phpName="Lastpaymentamount" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="LastPaymentDate" phpName="Lastpaymentdate" type="VARCHAR" size="50" required="true"/>
+    <column name="MeterMaintenanceCharge" phpName="Metermaintenancecharge" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="Discounts" phpName="Discounts" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="OtherCharges" phpName="Othercharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="PenaltyCharges" phpName="Penaltycharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="TaxCharges" phpName="Taxcharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="RoutineCharges" phpName="Routinecharges" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="BuildingType" phpName="Buildingtype" type="VARCHAR" size="100" required="true"/>
+    <column name="Route" phpName="Route" type="VARCHAR" size="10" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="service_charge" phpName="ServiceCharge" type="VARCHAR" size="50" required="true"/>
+    <column name="previous_balance" phpName="PreviousBalance" type="VARCHAR" size="50" required="true"/>
+    <column name="payment_received" phpName="PaymentReceived" type="VARCHAR" size="50" required="true"/>
+    <column name="last_payment_received_date" phpName="LastPaymentReceivedDate" type="TIMESTAMP" required="true"/>
+    <column name="current_charge" phpName="CurrentCharge" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="total_due" phpName="TotalDue" type="VARCHAR" size="50" required="true"/>
+    <column name="invoice_no" phpName="InvoiceNo" type="VARCHAR" size="50" required="true"/>
+    <column name="receipt_no" phpName="ReceiptNo" type="VARCHAR" size="50" required="true"/>
+    <column name="status" phpName="Status" type="BOOLEAN" size="1" required="true"/>
+    <column name="created_date" phpName="CreatedDate" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <index name="key2">
+      <index-column name="status"/>
+      <index-column name="bill_date"/>
+      <index-column name="total_due"/>
+    </index>
+    <unique name="key1">
+      <unique-column name="ref_no"/>
+      <unique-column name="customer_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="klu_email_template" idMethod="native" phpName="KluEmailTemplate">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="template_name" phpName="TemplateName" type="VARCHAR" size="255" required="true"/>
+    <column name="subject" phpName="Subject" type="VARCHAR" size="100" required="true"/>
+    <column name="body" phpName="Body" type="LONGVARCHAR" required="true"/>
+    <column name="help_tags" phpName="HelpTags" type="VARCHAR" size="255" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="klu_order" idMethod="native" phpName="KluOrder">
+    <column name="OrderID" phpName="Orderid" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="ref_no" phpName="RefNo" type="VARCHAR" size="50" required="true"/>
+    <column name="bill_id" phpName="BillId" type="INTEGER" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="service_type" phpName="ServiceType" type="VARCHAR" size="100" required="true"/>
+    <column name="payment_date" phpName="PaymentDate" type="DATE" required="true"/>
+    <column name="payment_due_date" phpName="PaymentDueDate" type="VARCHAR" size="50" required="true"/>
+    <column name="payment_time" phpName="PaymentTime" type="VARCHAR" size="10" required="true"/>
+    <column name="payment_platform" phpName="PaymentPlatform" type="VARCHAR" size="100" required="true"/>
+    <column name="cust_email" phpName="CustEmail" type="VARCHAR" size="100" required="true"/>
+    <column name="cust_phone" phpName="CustPhone" type="VARCHAR" size="15" required="true"/>
+    <column name="billing_period" phpName="BillingPeriod" type="VARCHAR" size="100" required="true"/>
+    <column name="solid_waste_rate" phpName="SolidWasteRate" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="solid_waste_vat" phpName="SolidWasteVat" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="solid_waste_tax" phpName="SolidWasteTax" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="liquid_waste_rate" phpName="LiquidWasteRate" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="liquid_waste_vat" phpName="LiquidWasteVat" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="liquid_waste_tax" phpName="LiquidWasteTax" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="previous_balance" phpName="PreviousBalance" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="payment_received" phpName="PaymentReceived" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="total_amount" phpName="TotalAmount" type="DECIMAL" size="11" scale="2" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="klu_sessionstbl" idMethod="native" phpName="KluSessionstbl">
+    <column name="session_id" phpName="SessionId" type="VARCHAR" size="40" primaryKey="true" required="true" defaultValue="0"/>
+    <column name="ip_address" phpName="IpAddress" type="VARCHAR" size="45" required="true" defaultValue="0"/>
+    <column name="user_agent" phpName="UserAgent" type="VARCHAR" size="120" required="true"/>
+    <column name="last_activity" phpName="LastActivity" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="user_data" phpName="UserData" type="LONGVARCHAR" required="true"/>
+    <index name="last_activity_idx">
+      <index-column name="last_activity"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="klu_user" idMethod="native" phpName="KluUser">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="passw" phpName="Passw" type="VARCHAR" size="200" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="customer_name" phpName="CustomerName" type="VARCHAR" size="150" required="true"/>
+    <column name="customer_address" phpName="CustomerAddress" type="VARCHAR" size="150" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="phone" phpName="Phone" type="VARCHAR" size="15" required="true"/>
+    <column name="street" phpName="Street" type="VARCHAR" size="100" required="true"/>
+    <column name="city" phpName="City" type="VARCHAR" size="50" required="true"/>
+    <column name="district" phpName="District" type="VARCHAR" size="50" required="true"/>
+    <column name="is_active" phpName="IsActive" type="CHAR" sqlType="enum('Y','N')" required="true" defaultValue="Y"/>
+    <column name="date_added" phpName="DateAdded" type="TIMESTAMP" required="true"/>
+    <column name="last_login" phpName="LastLogin" type="TIMESTAMP" required="true"/>
+    <index name="key2">
+      <index-column name="is_active"/>
+      <index-column name="id"/>
+      <index-column name="account_no"/>
+      <index-column name="email"/>
+    </index>
+    <unique name="account_no">
+      <unique-column name="account_no"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="klu_user_ol" idMethod="native" phpName="KluUserOl">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="passw" phpName="Passw" type="VARCHAR" size="200" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="customer_name" phpName="CustomerName" type="VARCHAR" size="150" required="true"/>
+    <column name="customer_address" phpName="CustomerAddress" type="VARCHAR" size="150" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="phone" phpName="Phone" type="VARCHAR" size="15" required="true"/>
+    <column name="street" phpName="Street" type="VARCHAR" size="100" required="true"/>
+    <column name="city" phpName="City" type="VARCHAR" size="50" required="true"/>
+    <column name="district" phpName="District" type="VARCHAR" size="50" required="true"/>
+    <column name="is_active" phpName="IsActive" type="CHAR" sqlType="enum('Y','N')" required="true" defaultValue="Y"/>
+    <column name="date_added" phpName="DateAdded" type="TIMESTAMP" required="true"/>
+    <column name="last_login" phpName="LastLogin" type="TIMESTAMP" required="true"/>
+    <column name="created_date" phpName="CreatedDate" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <index name="key2">
+      <index-column name="is_active"/>
+      <index-column name="id"/>
+      <index-column name="account_no"/>
+      <index-column name="email"/>
+    </index>
+    <unique name="account_no">
+      <unique-column name="account_no"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="limits" idMethod="native" phpName="Limits">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="uri" phpName="Uri" type="VARCHAR" size="255" required="true"/>
+    <column name="count" phpName="Count" type="INTEGER" size="10" required="true"/>
+    <column name="hour_started" phpName="HourStarted" type="INTEGER" required="true"/>
+    <column name="api_key" phpName="ApiKey" type="VARCHAR" size="40" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="logs" idMethod="native" phpName="Logs">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="uri" phpName="Uri" type="VARCHAR" size="255" required="true"/>
+    <column name="method" phpName="Method" type="VARCHAR" size="6" required="true"/>
+    <column name="params" phpName="Params" type="LONGVARCHAR"/>
+    <column name="api_key" phpName="ApiKey" type="VARCHAR" size="40" required="true"/>
+    <column name="ip_address" phpName="IpAddress" type="VARCHAR" size="45" required="true"/>
+    <column name="time" phpName="Time" type="INTEGER" required="true"/>
+    <column name="rtime" phpName="Rtime" type="FLOAT"/>
+    <column name="authorized" phpName="Authorized" type="BOOLEAN" size="1" required="true"/>
+    <column name="response_code" phpName="ResponseCode" type="SMALLINT" size="3" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="null_destbank_payment" idMethod="native" phpName="NullDestbankPayment">
+    <column name="id" phpName="Id" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="BillReferenceNumber" phpName="Billreferencenumber" type="VARCHAR" size="50" required="true"/>
+    <column name="TransactionID" phpName="Transactionid" type="VARCHAR" size="255" required="true"/>
+    <column name="SourceBank" phpName="Sourcebank" type="VARCHAR" size="255" required="true"/>
+    <column name="DestinationBank" phpName="Destinationbank" type="VARCHAR" size="255"/>
+    <column name="BuildingType" phpName="Buildingtype" type="VARCHAR" size="100" required="true"/>
+    <column name="CustomerName" phpName="Customername" type="VARCHAR" size="200" required="true"/>
+    <column name="District" phpName="District" type="VARCHAR" size="100" required="true"/>
+    <column name="Email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="Phone" phpName="Phone" type="VARCHAR" size="15" required="true"/>
+    <column name="OutstandingBalance" phpName="Outstandingbalance" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="TransactionDate" phpName="Transactiondate" type="TIMESTAMP" required="true"/>
+    <column name="date_initiated" phpName="DateInitiated" type="VARCHAR" size="50" required="true"/>
+    <column name="date_completed" phpName="DateCompleted" type="VARCHAR" size="50" required="true"/>
+    <column name="amount_paid" phpName="AmountPaid" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="AmountDue" phpName="Amountdue" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="platform" phpName="Platform" type="VARCHAR" size="50" required="true"/>
+    <column name="receipt_no" phpName="ReceiptNo" type="VARCHAR" size="50" required="true"/>
+    <column name="ServiceAddress" phpName="Serviceaddress" type="VARCHAR" size="255" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="null_destBank_payment_status" phpName="NullDestbankPaymentStatus" type="CHAR" sqlType="enum('P','U')" required="true" defaultValue="P"/>
+    <column name="reconcile_status" phpName="ReconcileStatus" type="BOOLEAN" size="1" required="true"/>
+    <column name="created_date" phpName="CreatedDate" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="uploadstatus" phpName="Uploadstatus" type="INTEGER" required="true" defaultValue="0"/>
+    <unique name="key2">
+      <unique-column name="BillReferenceNumber"/>
+      <unique-column name="TransactionID"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="otp" idMethod="native" phpName="Otp">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="opt" phpName="Opt" type="INTEGER" required="true"/>
+    <column name="Status" phpName="Status" type="VARCHAR" size="10" required="true"/>
+    <column name="date_created" phpName="DateCreated" type="DATE" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="payment" idMethod="native" phpName="Payment">
+    <column name="id" phpName="Id" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="BillReferenceNumber" phpName="Billreferencenumber" type="VARCHAR" size="50" required="true"/>
+    <column name="TransactionID" phpName="Transactionid" type="VARCHAR" size="255" required="true"/>
+    <column name="SourceBank" phpName="Sourcebank" type="VARCHAR" size="255" required="true"/>
+    <column name="DestinationBank" phpName="Destinationbank" type="VARCHAR" size="255"/>
+    <column name="BuildingType" phpName="Buildingtype" type="VARCHAR" size="100" required="true"/>
+    <column name="CustomerName" phpName="Customername" type="VARCHAR" size="200" required="true"/>
+    <column name="District" phpName="District" type="VARCHAR" size="100" required="true"/>
+    <column name="Email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="Phone" phpName="Phone" type="VARCHAR" size="15" required="true"/>
+    <column name="OutstandingBalance" phpName="Outstandingbalance" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="TransactionDate" phpName="Transactiondate" type="TIMESTAMP" required="true"/>
+    <column name="date_initiated" phpName="DateInitiated" type="VARCHAR" size="50" required="true"/>
+    <column name="date_completed" phpName="DateCompleted" type="VARCHAR" size="50" required="true"/>
+    <column name="amount_paid" phpName="AmountPaid" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="AmountDue" phpName="Amountdue" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="platform" phpName="Platform" type="VARCHAR" size="50" required="true"/>
+    <column name="receipt_no" phpName="ReceiptNo" type="VARCHAR" size="50" required="true"/>
+    <column name="ServiceAddress" phpName="Serviceaddress" type="VARCHAR" size="255" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="payment_status" phpName="PaymentStatus" type="CHAR" sqlType="enum('P','U')" required="true" defaultValue="P"/>
+    <column name="reconcile_status" phpName="ReconcileStatus" type="BOOLEAN" size="1" required="true"/>
+    <column name="created_date" phpName="CreatedDate" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="uploadstatus" phpName="Uploadstatus" type="INTEGER" required="true" defaultValue="0"/>
+    <unique name="key2">
+      <unique-column name="BillReferenceNumber"/>
+      <unique-column name="TransactionID"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="payment_ol" idMethod="native" phpName="PaymentOl">
+    <column name="id" phpName="Id" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="BillReferenceNumber" phpName="Billreferencenumber" type="VARCHAR" size="50" required="true"/>
+    <column name="TransactionID" phpName="Transactionid" type="VARCHAR" size="255" required="true"/>
+    <column name="SourceBank" phpName="Sourcebank" type="VARCHAR" size="255" required="true"/>
+    <column name="DestinationBank" phpName="Destinationbank" type="VARCHAR" size="255"/>
+    <column name="BuildingType" phpName="Buildingtype" type="VARCHAR" size="100" required="true"/>
+    <column name="CustomerName" phpName="Customername" type="VARCHAR" size="200" required="true"/>
+    <column name="District" phpName="District" type="VARCHAR" size="100" required="true"/>
+    <column name="Email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="Phone" phpName="Phone" type="VARCHAR" size="15" required="true"/>
+    <column name="OutstandingBalance" phpName="Outstandingbalance" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="TransactionDate" phpName="Transactiondate" type="TIMESTAMP" required="true"/>
+    <column name="date_initiated" phpName="DateInitiated" type="VARCHAR" size="50" required="true"/>
+    <column name="date_completed" phpName="DateCompleted" type="VARCHAR" size="50" required="true"/>
+    <column name="amount_paid" phpName="AmountPaid" type="VARCHAR" size="50" required="true"/>
+    <column name="AmountDue" phpName="Amountdue" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="platform" phpName="Platform" type="VARCHAR" size="50" required="true"/>
+    <column name="receipt_no" phpName="ReceiptNo" type="VARCHAR" size="50" required="true"/>
+    <column name="ServiceAddress" phpName="Serviceaddress" type="VARCHAR" size="255" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="payment_status" phpName="PaymentStatus" type="CHAR" sqlType="enum('P','U')" required="true" defaultValue="P"/>
+    <column name="reconcile_status" phpName="ReconcileStatus" type="BOOLEAN" size="1" required="true"/>
+    <column name="created_date" phpName="CreatedDate" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="uploadstatus" phpName="Uploadstatus" type="INTEGER" required="true" defaultValue="0"/>
+    <unique name="key2">
+      <unique-column name="BillReferenceNumber"/>
+      <unique-column name="TransactionID"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="payment_pos" idMethod="native" phpName="PaymentPos">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="customer_id" phpName="CustomerId" type="INTEGER" required="true"/>
+    <column name="station_id" phpName="StationId" type="INTEGER" required="true"/>
+    <column name="customer_name" phpName="CustomerName" type="VARCHAR" size="100" required="true"/>
+    <column name="amount" phpName="Amount" type="VARCHAR" size="50" required="true"/>
+    <column name="bill_code" phpName="BillCode" type="VARCHAR" size="64" required="true"/>
+    <column name="bill_name" phpName="BillName" type="VARCHAR" size="60" required="true"/>
+    <column name="bill_category_code" phpName="BillCategoryCode" type="VARCHAR" size="64" required="true"/>
+    <column name="bill_category" phpName="BillCategory" type="VARCHAR" size="64" required="true"/>
+    <column name="month" phpName="Month" type="VARCHAR" size="20" required="true"/>
+    <column name="year" phpName="Year" type="VARCHAR" size="20" required="true"/>
+    <column name="txcode" phpName="Txcode" type="VARCHAR" size="64" required="true"/>
+    <column name="station" phpName="Station" type="VARCHAR" size="50" required="true"/>
+    <column name="operator_code" phpName="OperatorCode" type="VARCHAR" size="64" required="true"/>
+    <column name="operator" phpName="Operator" type="VARCHAR" size="50" required="true"/>
+    <column name="terminal" phpName="Terminal" type="VARCHAR" size="64" required="true"/>
+    <column name="txdate" phpName="Txdate" type="VARCHAR" size="60" required="true"/>
+    <column name="txtime" phpName="Txtime" type="VARCHAR" size="60" required="true"/>
+    <column name="current_utc" phpName="CurrentUtc" type="VARCHAR" size="50" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="payment_pos_ol" idMethod="native" phpName="PaymentPosOl">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="customer_id" phpName="CustomerId" type="INTEGER" required="true"/>
+    <column name="station_id" phpName="StationId" type="INTEGER" required="true"/>
+    <column name="customer_name" phpName="CustomerName" type="VARCHAR" size="100" required="true"/>
+    <column name="amount" phpName="Amount" type="VARCHAR" size="50" required="true"/>
+    <column name="bill_code" phpName="BillCode" type="VARCHAR" size="64" required="true"/>
+    <column name="bill_name" phpName="BillName" type="VARCHAR" size="60" required="true"/>
+    <column name="bill_category_code" phpName="BillCategoryCode" type="VARCHAR" size="64" required="true"/>
+    <column name="bill_category" phpName="BillCategory" type="VARCHAR" size="64" required="true"/>
+    <column name="month" phpName="Month" type="VARCHAR" size="20" required="true"/>
+    <column name="year" phpName="Year" type="VARCHAR" size="20" required="true"/>
+    <column name="txcode" phpName="Txcode" type="VARCHAR" size="64" required="true"/>
+    <column name="station" phpName="Station" type="VARCHAR" size="50" required="true"/>
+    <column name="operator_code" phpName="OperatorCode" type="VARCHAR" size="64" required="true"/>
+    <column name="operator" phpName="Operator" type="VARCHAR" size="50" required="true"/>
+    <column name="terminal" phpName="Terminal" type="VARCHAR" size="64" required="true"/>
+    <column name="txdate" phpName="Txdate" type="VARCHAR" size="60" required="true"/>
+    <column name="txtime" phpName="Txtime" type="VARCHAR" size="60" required="true"/>
+    <column name="current_utc" phpName="CurrentUtc" type="VARCHAR" size="50" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="recordtimers" idMethod="native" phpName="Recordtimers">
+    <column name="trans_id" phpName="TransId" type="VARCHAR" size="10" required="true"/>
+    <column name="trans_date" phpName="TransDate" type="TIMESTAMP" required="true"/>
+    <column name="received_date" phpName="ReceivedDate" type="TIMESTAMP" required="true"/>
+    <unique name="trans_id">
+      <unique-column name="trans_id"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="request_header" idMethod="native" phpName="RequestHeader">
+    <column name="signature" phpName="Signature" type="VARCHAR" size="100" required="true"/>
+    <column name="p_data" phpName="PData" type="VARCHAR" size="250" required="true"/>
+    <column name="api_key" phpName="ApiKey" type="VARCHAR" size="100" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="reversal" idMethod="native" phpName="Reversal">
+    <column name="revid" phpName="Revid" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id" phpName="Id" type="INTEGER" size="10" required="true"/>
+    <column name="account_no" phpName="AccountNo" type="VARCHAR" size="50" required="true"/>
+    <column name="BillReferenceNumber" phpName="Billreferencenumber" type="VARCHAR" size="50" required="true"/>
+    <column name="TransactionID" phpName="Transactionid" type="VARCHAR" size="255" required="true"/>
+    <column name="SourceBank" phpName="Sourcebank" type="VARCHAR" size="255" required="true"/>
+    <column name="DestinationBank" phpName="Destinationbank" type="VARCHAR" size="255"/>
+    <column name="BuildingType" phpName="Buildingtype" type="VARCHAR" size="100" required="true"/>
+    <column name="CustomerName" phpName="Customername" type="VARCHAR" size="200" required="true"/>
+    <column name="District" phpName="District" type="VARCHAR" size="100" required="true"/>
+    <column name="Email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="Phone" phpName="Phone" type="VARCHAR" size="15" required="true"/>
+    <column name="OutstandingBalance" phpName="Outstandingbalance" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="TransactionDate" phpName="Transactiondate" type="TIMESTAMP" required="true"/>
+    <column name="date_initiated" phpName="DateInitiated" type="VARCHAR" size="50" required="true"/>
+    <column name="date_completed" phpName="DateCompleted" type="VARCHAR" size="50" required="true"/>
+    <column name="amount_paid" phpName="AmountPaid" type="DECIMAL" size="20" scale="2" required="true"/>
+    <column name="AmountDue" phpName="Amountdue" type="DECIMAL" size="11" scale="2" required="true"/>
+    <column name="platform" phpName="Platform" type="VARCHAR" size="50" required="true"/>
+    <column name="receipt_no" phpName="ReceiptNo" type="VARCHAR" size="50" required="true"/>
+    <column name="ServiceAddress" phpName="Serviceaddress" type="VARCHAR" size="255" required="true"/>
+    <column name="UsageType" phpName="Usagetype" type="VARCHAR" size="255" required="true"/>
+    <column name="payment_status" phpName="PaymentStatus" type="CHAR" sqlType="enum('P','U')" required="true" defaultValue="P"/>
+    <column name="reconcile_status" phpName="ReconcileStatus" type="BOOLEAN" size="1" required="true" defaultValue="false"/>
+    <column name="created_date" phpName="CreatedDate" type="DATE" required="true"/>
+    <column name="uploadstatus" phpName="Uploadstatus" type="INTEGER" size="1" required="true"/>
+    <column name="reversal_reason" phpName="ReversalReason" type="LONGVARCHAR" required="true"/>
+    <column name="executor" phpName="Executor" type="VARCHAR" size="50" required="true"/>
+    <column name="reversal_date" phpName="ReversalDate" type="DATE" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="system_audit_trails" idMethod="native" phpName="SystemAuditTrails">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="tbl" phpName="Tbl" type="VARCHAR" size="45"/>
+    <column name="tbl_id" phpName="TblId" type="INTEGER"/>
+    <column name="user_id" phpName="UserId" type="INTEGER"/>
+    <column name="module" phpName="Module" type="VARCHAR" size="150"/>
+    <column name="audit_title" phpName="AuditTitle" type="VARCHAR" size="250"/>
+    <column name="audit_description" phpName="AuditDescription" type="CLOB"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <column name="deleted_at" phpName="DeletedAt" type="DATE"/>
+    <column name="priority" phpName="Priority" type="CHAR" sqlType="enum('HIGH','LOW','MEDIUM')" defaultValue="MEDIUM"/>
+    <column name="activity_type" phpName="ActivityType" type="CHAR" sqlType="enum('SYSTEM','USER')"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="test_table_bill" idMethod="native" phpName="TestTableBill">
+    <column name="id" phpName="Id" type="INTEGER" size="50" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="col1" phpName="Col1" type="VARCHAR" size="250" required="true"/>
+    <column name="col2" phpName="Col2" type="VARCHAR" size="250" required="true"/>
+    <column name="col3" phpName="Col3" type="VARCHAR" size="250" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="test_table_nibss" idMethod="native" phpName="TestTableNibss">
+    <column name="id" phpName="Id" type="INTEGER" size="10" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="col1" phpName="Col1" type="LONGVARCHAR"/>
+    <column name="col2" phpName="Col2" type="TIMESTAMP" defaultExpr="CURRENT_TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="MyISAM"/>
+    </vendor>
+  </table>
+  <table name="users" idMethod="native" phpName="Users">
+    <column name="id" phpName="Id" type="SMALLINT" size="8" sqlType="mediumint(8) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="ip_address" phpName="IpAddress" type="VARCHAR" size="16" sqlType="varbinary(16)" required="true"/>
+    <column name="username" phpName="Username" type="VARCHAR" size="100" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="80" required="true"/>
+    <column name="salt" phpName="Salt" type="VARCHAR" size="40"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="100" required="true"/>
+    <column name="activation_code" phpName="ActivationCode" type="VARCHAR" size="40"/>
+    <column name="forgotten_password_code" phpName="ForgottenPasswordCode" type="VARCHAR" size="40"/>
+    <column name="forgotten_password_time" phpName="ForgottenPasswordTime" type="INTEGER" sqlType="int(11) unsigned"/>
+    <column name="remember_code" phpName="RememberCode" type="VARCHAR" size="40"/>
+    <column name="created_on" phpName="CreatedOn" type="INTEGER" sqlType="int(11) unsigned" required="true"/>
+    <column name="last_login" phpName="LastLogin" type="INTEGER" sqlType="int(11) unsigned"/>
+    <column name="active" phpName="Active" type="BOOLEAN" size="1" sqlType="tinyint(1) unsigned"/>
+    <column name="first_name" phpName="FirstName" type="VARCHAR" size="50"/>
+    <column name="last_name" phpName="LastName" type="VARCHAR" size="50"/>
+    <column name="company" phpName="Company" type="VARCHAR" size="100"/>
+    <column name="phone" phpName="Phone" type="VARCHAR" size="20"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users_groups" idMethod="native" phpName="UsersGroups">
+    <column name="id" phpName="Id" type="SMALLINT" size="8" sqlType="mediumint(8) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="user_id" phpName="UserId" type="SMALLINT" size="8" sqlType="mediumint(8) unsigned" required="true"/>
+    <column name="group_id" phpName="GroupId" type="SMALLINT" size="8" sqlType="mediumint(8) unsigned" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users_keys" idMethod="native" phpName="UsersKeys">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="api_key" phpName="ApiKey" type="VARCHAR" size="40" required="true"/>
+    <column name="secret_key" phpName="SecretKey" type="VARCHAR" size="256" required="true"/>
+    <column name="level" phpName="Level" type="INTEGER" size="2" required="true"/>
+    <column name="ignore_limits" phpName="IgnoreLimits" type="BOOLEAN" size="1" required="true" defaultValue="false"/>
+    <column name="is_private_key" phpName="IsPrivateKey" type="BOOLEAN" size="1" required="true" defaultValue="false"/>
+    <column name="ip_addresses" phpName="IpAddresses" type="LONGVARCHAR"/>
+    <column name="date_created" phpName="DateCreated" type="INTEGER" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>
